@@ -1,24 +1,24 @@
 services:
   backend:
     build:
-      context: ../backend
+      context: ../biblioteca-digital-backend
       dockerfile: Dockerfile
     volumes:
-      - ../backend/libros_pdf:/app/libros_pdf
-      - ../backend/libros_portada:/app/libros_portada
-      - ../backend/wallet:/app/wallet
+      - ../biblioteca-digital-backend/libros_pdf:/app/libros_pdf
+      - ../biblioteca-digital-backend/libros_portada:/app/libros_portada
+      - ../biblioteca-digital-backend/wallet:/app/wallet
     env_file:
-      - ../backend/.env
+      - ../biblioteca-digital-backend/.env
     restart: unless-stopped
 
   frontend:
     build:
-      context: ../frontend
+      context: ../biblioteca-digital-frontend
     ports:
       - "80:80"
     volumes:
-      - ../backend/libros_pdf:/var/www/libros_pdf
-      - ../backend/libros_portada:/var/www/libros_portada
+      - ../biblioteca-digital-backend/libros_pdf:/var/www/libros_pdf
+      - ../biblioteca-digital-backend/libros_portada:/var/www/libros_portada
     depends_on:
       - backend
     restart: unless-stopped
